@@ -1,0 +1,38 @@
+[11 jun 2024 08:51:15] DEBUG Executing SQL script
+[11 jun 2024 08:51:15] INFO ================================================================================
+[11 jun 2024 08:51:15] INFO onError= 'stop'
+[11 jun 2024 08:51:15] INFO autoCommit= 'false'
+[11 jun 2024 08:51:15] INFO username= 'admin'
+[11 jun 2024 08:51:15] INFO outputPath= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\iVolunteer\.Temp~\UpdateSQL.xml'
+[11 jun 2024 08:51:15] INFO outputLogPath= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\iVolunteer\.Temp~\UpdateSQL.xml.log'
+[11 jun 2024 08:51:15] INFO encoding= ''
+[11 jun 2024 08:51:15] INFO driverClass= 'org.apache.derby.jdbc.ClientDriver'
+[11 jun 2024 08:51:15] INFO sqlScript= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\iVolunteer\.Temp~\UpdateSQL.sql'
+[11 jun 2024 08:51:15] INFO eventSocketPort= '54196'
+[11 jun 2024 08:51:15] INFO statementSeparator= ';'
+[11 jun 2024 08:51:15] INFO derby.system.home= 'C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\.metadata\.plugins\com.webratio.commons.db\derby'
+[11 jun 2024 08:51:15] INFO password= 'admin'
+[11 jun 2024 08:51:15] INFO url= 'jdbc:derby://localhost:50103/iVolunteer_DB;create=true'
+[11 jun 2024 08:51:15] INFO ================================================================================
+[11 jun 2024 08:51:15] INFO Connecting to the Database...
+[11 jun 2024 08:51:16] INFO Database connection estabilished
+[11 jun 2024 08:51:16] INFO transaction isolation: 2
+[11 jun 2024 08:51:16] DEBUG ================================================================================
+[11 jun 2024 08:51:16] DEBUG Executing SQL script file: C:\WebRatio\WebRatio Platform 7.2.18.x64bit\workspace\iVolunteer\.Temp~\UpdateSQL.sql
+[11 jun 2024 08:51:16] DEBUG Executing statement:  create table "APP"."GROUP" ( "OID"  integer  not null, "GROUPNAME"  varchar(255), primary key ("OID") )
+[11 jun 2024 08:51:16] DEBUG Executing statement:    create table "APP"."MODULE" ( "OID"  integer  not null, "MODULEID"  varchar(255), "MODULENAME"  varchar(255), primary key ("OID") )
+[11 jun 2024 08:51:16] DEBUG Executing statement:    create table "APP"."USER" ( "OID"  integer  not null, "USERNAME"  varchar(255), "PASSWORD"  varchar(255), "EMAIL"  varchar(255), primary key ("OID") )
+[11 jun 2024 08:51:16] DEBUG Executing statement:    alter table "APP"."GROUP"  add column  "MODULE_OID"  integer
+[11 jun 2024 08:51:16] DEBUG Executing statement:  alter table "APP"."GROUP"   add constraint FK_GROUP_MODULE foreign key ("MODULE_OID") references "APP"."MODULE" ("OID")
+[11 jun 2024 08:51:16] DEBUG Executing statement:    create table "APP"."GROUP_MODULE" ( "GROUP_OID"  integer not null, "MODULE_OID"  integer not null, primary key ("GROUP_OID", "MODULE_OID") )
+[11 jun 2024 08:51:16] DEBUG Executing statement:  alter table "APP"."GROUP_MODULE"   add constraint FK_GROUP_MODULE_GROUP foreign key ("GROUP_OID") references "APP"."GROUP" ("OID")
+[11 jun 2024 08:51:16] DEBUG Executing statement:  alter table "APP"."GROUP_MODULE"   add constraint FK_GROUP_MODULE_MODULE foreign key ("MODULE_OID") references "APP"."MODULE" ("OID")
+[11 jun 2024 08:51:16] DEBUG Executing statement:    alter table "APP"."USER"  add column  "GROUP_OID"  integer
+[11 jun 2024 08:51:16] DEBUG Executing statement:  alter table "APP"."USER"   add constraint FK_USER_GROUP foreign key ("GROUP_OID") references "APP"."GROUP" ("OID")
+[11 jun 2024 08:51:16] DEBUG Executing statement:    create table "APP"."USER_GROUP" ( "USER_OID"  integer not null, "GROUP_OID"  integer not null, primary key ("USER_OID", "GROUP_OID") )
+[11 jun 2024 08:51:16] DEBUG Executing statement:  alter table "APP"."USER_GROUP"   add constraint FK_USER_GROUP_USER foreign key ("USER_OID") references "APP"."USER" ("OID")
+[11 jun 2024 08:51:16] DEBUG Executing statement:  alter table "APP"."USER_GROUP"   add constraint FK_USER_GROUP_GROUP foreign key ("GROUP_OID") references "APP"."GROUP" ("OID")
+[11 jun 2024 08:51:16] DEBUG ================================================================================
+[11 jun 2024 08:51:16] DEBUG SQL SCRIPT SUCCESSFULLY EXECUTED
+[11 jun 2024 08:51:16] INFO Database connection closed
+[11 jun 2024 08:51:16] DEBUG Total time: 659 milliseconds
